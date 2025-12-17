@@ -5,6 +5,7 @@ import { Menu } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { useEffect, useState, useRef } from "react";
+import { gsap } from "gsap";
 
 const navLinks = [
     { href: "#hero", label: "Home" },
@@ -17,8 +18,23 @@ export default function Navbar() {
     const [showNavbar, setShowNavbar] = useState(false);
     const [activeSection, setActiveSection] = useState("#hero");
     const hideTimeout = useRef(null);
+    const navRef = useRef(null);
+    const linksRef = useRef([]);
 
     useEffect(() => {
+        // Initial Animation
+        const ctx = gsap.context(() => {
+            gsap.fromTo(navRef.current,
+                { y: -100, opacity: 0 },
+                { y: 0, opacity: 1, duration: 1, ease: "power3.out" }
+            );
+
+            gsap.fromTo(".nav-link",
+                { y: -20, opacity: 0 },
+                { y: 0, opacity: 1, duration: 0.5, stagger: 0.1, delay: 0.5, ease: "back.out(1.7)" }
+            );
+        }, navRef);
+
         const handleScroll = () => {
             const isDesktop = window.innerWidth >= 768;
 
@@ -57,11 +73,13 @@ export default function Navbar() {
             window.removeEventListener("scroll", handleScroll);
             window.removeEventListener("resize", handleScroll);
             if (hideTimeout.current) clearTimeout(hideTimeout.current);
+            ctx.revert();
         };
     }, []);
 
     return (
         <header
+            ref={navRef}
             className={`fixed top-0 left-0 w-full border-b border-gray-800 bg-gradient-to-r from-black via-gray-900 to-black backdrop-blur-md z-50 transition-transform duration-500 shadow-lg
       ${showNavbar ? "translate-y-0" : "-translate-y-full md:-translate-y-full"}`}
         >
@@ -76,11 +94,11 @@ export default function Navbar() {
 
                 {/* Desktop Menu */}
                 <nav className="hidden md:flex gap-8">
-                    {navLinks.map((link) => (
+                    {navLinks.map((link, index) => (
                         <a
                             key={link.href}
                             href={link.href}
-                            className={`relative text-sm font-medium transition-colors duration-300
+                            className={`nav-link relative text-sm font-medium transition-colors duration-300
                 ${activeSection === link.href
                                     ? "text-green-400"
                                     : "text-gray-300 hover:text-green-300"

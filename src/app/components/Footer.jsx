@@ -3,12 +3,37 @@
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Mail, Phone, MapPin } from "lucide-react";
+import { useEffect, useRef } from "react";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 
 export default function Footer() {
     const year = new Date().getFullYear();
+    const footerRef = useRef(null);
+
+    useEffect(() => {
+        const ctx = gsap.context(() => {
+            gsap.from(footerRef.current.children, {
+                scrollTrigger: {
+                    trigger: footerRef.current,
+                    start: "top 95%",
+                    toggleActions: "play none none reverse",
+                },
+                y: 50,
+                opacity: 0,
+                duration: 1,
+                stagger: 0.2,
+                ease: "power3.out"
+            });
+        }, footerRef);
+
+        return () => ctx.revert();
+    }, []);
 
     return (
-        <footer className="bg-gradient-to-r from-black via-gray-900 to-black text-gray-300 py-12 mt-15">
+        <footer ref={footerRef} className="bg-gradient-to-r from-black via-gray-900 to-black text-gray-300 py-12 mt-15">
             <div className="container mx-auto px-4 grid md:grid-cols-3 gap-8">
                 {/* About / Logo */}
                 <div className="flex flex-col gap-4">

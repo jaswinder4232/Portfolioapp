@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import {
     Dialog,
@@ -10,6 +10,10 @@ import {
     DialogFooter,
     DialogTrigger,
 } from "@/components/ui/dialog";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 
 export default function ContactForm() {
     const [formData, setFormData] = useState({
@@ -21,6 +25,39 @@ export default function ContactForm() {
 
     const [loading, setLoading] = useState(false);
     const [successOpen, setSuccessOpen] = useState(false);
+    const formRef = useRef(null);
+
+    useEffect(() => {
+        const ctx = gsap.context(() => {
+            gsap.from(formRef.current, {
+                scrollTrigger: {
+                    trigger: formRef.current,
+                    start: "top 80%",
+                    toggleActions: "play none none reverse",
+                },
+                y: 50,
+                opacity: 0,
+                duration: 0.8,
+                ease: "power3.out"
+            });
+
+            gsap.from(formRef.current.children, {
+                scrollTrigger: {
+                    trigger: formRef.current,
+                    start: "top 80%",
+                    toggleActions: "play none none reverse",
+                },
+                y: 20,
+                opacity: 1,
+                duration: 0.5,
+                stagger: 0.1,
+                delay: 0.2,
+                ease: "power2.out"
+            });
+        }, formRef);
+
+        return () => ctx.revert();
+    }, []);
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -66,6 +103,7 @@ export default function ContactForm() {
         <>
             {/* Contact Form */}
             <form
+                ref={formRef}
                 onSubmit={handleSubmit}
                 className="max-w-2xl mx-auto bg-gray-900 bg-opacity-80 p-8 rounded-lg shadow-lg flex flex-col gap-4 px-lg-0 px-3 " id="contact"
             >
