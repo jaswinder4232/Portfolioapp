@@ -125,7 +125,8 @@ export default function Navbar() {
                     </SheetTrigger>
                     <SheetContent
                         side="right"
-                        className="w-[250px] bg-gradient-to-b from-black via-gray-900 to-black border-l border-gray-800"
+                        className="w-[250px] bg-gradient-to-b from-black via-gray-900 to-black border-l border-gray-800 text-white"
+                        
                     >
                         <nav className="mt-10 flex flex-col gap-6">
                             {navLinks.map((link) => (

@@ -45,7 +45,7 @@ export default function WelcomeAnimation({ onComplete }) {
         >
             <h1
                 ref={textRef}
-                className="text-5xl md:text-7xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-emerald-500"
+                className="text-3xl lg:text-7xl md:text-5xl sm:text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-emerald-500"
             >
                 Welcome to My Portfolio
             </h1>
