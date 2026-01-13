@@ -4,7 +4,7 @@ import Visitor from "./components/visitor";
 import Script from "next/script";
 import ScrollTracker from "./components/ScrollTracker";
 import GAListener from "./components/GAListener";
-
+import { Suspense } from "react";
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -42,7 +42,10 @@ export default function RootLayout({ children }) {
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <GAListener />
+        <Suspense fallback={null}>
+          <GAListener />
+        </Suspense>
+
         <ScrollTracker />
         {children}
         <Visitor />

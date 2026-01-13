@@ -1,15 +1,17 @@
 "use client";
 
+import { Suspense, useEffect } from "react";
 import { usePathname, useSearchParams } from "next/navigation";
-import { useEffect } from "react";
 
-export default function GAListener() {
+function GAListenerContent() {
     const pathname = usePathname();
     const searchParams = useSearchParams();
 
     useEffect(() => {
+        if (!window.gtag) return;
+
         const url =
-            pathname + (searchParams?.toString() ? `?${searchParams}` : "");
+            pathname + (searchParams?.toString() ? `?${searchParams.toString()}` : "");
 
         window.gtag("config", "G-R7RDP2W2QZ", {
             page_path: url,
@@ -18,3 +20,12 @@ export default function GAListener() {
 
     return null;
 }
+
+export default function GAListener() {
+    return (
+        <Suspense fallback={null}>
+            <GAListenerContent />
+        </Suspense>
+    );
+}
+
