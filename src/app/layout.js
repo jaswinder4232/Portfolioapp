@@ -1,10 +1,10 @@
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Visitor from "./components/visitor";
-import Script from "next/script";
 import ScrollTracker from "./components/ScrollTracker";
 import GAListener from "./components/GAListener";
 import { Suspense } from "react";
+import { GoogleAnalytics } from "next-google-analytics";
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -24,24 +24,13 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <head>
-        <Script
-          src={`https://www.googletagmanager.com/gtag/js?id=G-R7RDP2W2QZ`}
-          strategy="afterInteractive"
-        />
-        <Script id="ga-init" strategy="afterInteractive">
-          {`
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-            gtag('config', 'G-R7RDP2W2QZ', {
-              page_path: window.location.pathname,
-            });
-          `}
-        </Script>
+
       </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
+        <GoogleAnalytics gaId="G-R7RDP2W2QZ" />
+
         <Suspense fallback={null}>
           <GAListener />
         </Suspense>
