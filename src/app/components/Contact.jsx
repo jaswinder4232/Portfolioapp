@@ -32,27 +32,27 @@ export default function ContactForm() {
             gsap.from(formRef.current, {
                 scrollTrigger: {
                     trigger: formRef.current,
-                    start: "top 80%",
+                    start: "top 90%",
                     toggleActions: "play none none reverse",
                 },
-                y: 50,
+                y: 100,
                 opacity: 0,
-                duration: 0.8,
-                ease: "power3.out"
+                duration: 1.2,
+                ease: "power4.out"
             });
 
             gsap.from(formRef.current.children, {
                 scrollTrigger: {
                     trigger: formRef.current,
-                    start: "top 80%",
+                    start: "top 90%",
                     toggleActions: "play none none reverse",
                 },
-                y: 20,
-                opacity: 1,
-                duration: 0.5,
+                y: 30,
+                opacity: 0,
+                duration: 1,
                 stagger: 0.1,
                 delay: 0.2,
-                ease: "power2.out"
+                ease: "power3.out"
             });
         }, formRef);
 
@@ -151,7 +151,7 @@ export default function ContactForm() {
 
                 <Button
                     type="submit"
-                    className="bg-gradient-to-r from-green-400 to-emerald-500 text-black font-bold hover:from-green-500 hover:to-emerald-600"
+                    className="interactive bg-gradient-to-r from-green-400 to-emerald-500 text-black font-bold hover:from-green-500 hover:to-emerald-600"
                     disabled={loading}
                 >
                     {loading ? "Sending..." : "Send Message"}

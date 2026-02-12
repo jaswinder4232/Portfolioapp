@@ -6,12 +6,16 @@ import { Github, Linkedin, Mail } from "lucide-react";
 import profileImage from "../../../public/profilepic.jpg";
 import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { event } from "@/lib/ga";
+
+gsap.registerPlugin(ScrollTrigger);
 
 export default function Home() {
     const containerRef = useRef(null);
     const textRef = useRef(null);
     const imageRef = useRef(null);
+    const bgGridRef = useRef(null);
 
     useEffect(() => {
         const ctx = gsap.context(() => {
@@ -19,32 +23,56 @@ export default function Home() {
 
             // Text Animations
             tl.from(".hero-text-element", {
-                y: 50,
+                y: 100,
                 opacity: 0,
-                duration: 0.8,
-                stagger: 0.2,
-                ease: "power3.out"
+                duration: 1.2,
+                stagger: 0.1,
+                ease: "power4.out"
             })
                 // Image Animation
                 .from(imageRef.current, {
-                    scale: 0.8,
+                    scale: 0.5,
                     opacity: 0,
-                    rotation: -10,
-                    duration: 1,
-                    ease: "elastic.out(1, 0.5)"
-                }, "-=0.5");
+                    rotation: -15,
+                    duration: 1.5,
+                    ease: "elastic.out(1, 0.3)"
+                }, "-=0.8");
 
-            // Interactive Parallax Effect on Image
+            // Scroll Parallax for Image
+            gsap.to(imageRef.current, {
+                y: 100,
+                ease: "none",
+                scrollTrigger: {
+                    trigger: containerRef.current,
+                    start: "top top",
+                    end: "bottom top",
+                    scrub: true
+                }
+            });
+
+            // Scroll Parallax for Background Grid
+            gsap.to(bgGridRef.current, {
+                y: 50,
+                ease: "none",
+                scrollTrigger: {
+                    trigger: containerRef.current,
+                    start: "top top",
+                    end: "bottom top",
+                    scrub: true
+                }
+            });
+
+            // Interactive Parallax Effect on Image (Mouse Move)
             const handleMouseMove = (e) => {
                 const { clientX, clientY } = e;
-                const x = (clientX - window.innerWidth / 2) / 20;
-                const y = (clientY - window.innerHeight / 2) / 20;
+                const x = (clientX - window.innerWidth / 2) / 30;
+                const y = (clientY - window.innerHeight / 2) / 30;
 
                 gsap.to(imageRef.current, {
                     x: x,
                     y: y,
-                    duration: 0.5,
-                    ease: "power1.out"
+                    duration: 0.8,
+                    ease: "power2.out"
                 });
             };
 
@@ -59,7 +87,7 @@ export default function Home() {
     return (
         <section ref={containerRef} className="relative container mx-auto min-h-screen flex items-center justify-center bg-gradient-to-br from-black via-gray-900 to-black bg-fixed px-6" id="hero">
             {/* Subtle background effect */}
-            <div className="absolute inset-0 bg-grid-white/[0.05] pointer-events-none" />
+            <div ref={bgGridRef} className="absolute inset-0 bg-grid-white/[0.05] pointer-events-none" />
 
             <div className="relative w-full grid md:grid-cols-2 gap-10 items-center z-10">
                 {/* Left Content */}

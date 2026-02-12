@@ -41,26 +41,26 @@ export default function Projects() {
             gsap.from(titleRef.current, {
                 scrollTrigger: {
                     trigger: titleRef.current,
-                    start: "top 80%",
-                    toggleActions: "play none none reverse",
-                },
-                y: 30,
-                opacity: 0,
-                duration: 0.8,
-                ease: "power3.out"
-            });
-
-            gsap.from(swiperRef.current, {
-                scrollTrigger: {
-                    trigger: swiperRef.current,
-                    start: "top 85%",
+                    start: "top 90%",
                     toggleActions: "play none none reverse",
                 },
                 y: 50,
                 opacity: 0,
                 duration: 1,
-                ease: "power3.out",
-                delay: 0.2
+                ease: "power4.out"
+            });
+
+            gsap.from(".swiper-slide", {
+                scrollTrigger: {
+                    trigger: swiperRef.current,
+                    start: "top 85%",
+                    toggleActions: "play none none reverse",
+                },
+                y: 100,
+                opacity: 0,
+                duration: 1.2,
+                stagger: 0.2,
+                ease: "power4.out",
             });
         }, sectionRef);
 

@@ -28,7 +28,7 @@ export default function AboutMe() {
             // Parallax on subtle grid background
             if (bgRef.current) {
                 gsap.to(bgRef.current, {
-                    y: -50,
+                    y: 100,
                     ease: "none",
                     scrollTrigger: {
                         trigger: containerRef.current,
@@ -45,14 +45,14 @@ export default function AboutMe() {
                 gsap.from(words, {
                     scrollTrigger: {
                         trigger: headingRef.current,
-                        start: "top 85%",
+                        start: "top 90%",
                         toggleActions: "play none none reverse",
                     },
-                    y: 30,
+                    y: 50,
                     opacity: 0,
-                    duration: 0.6,
-                    stagger: 0.15,
-                    ease: "power3.out",
+                    duration: 1,
+                    stagger: 0.1,
+                    ease: "power4.out",
                 });
 
                 // Underline reveal
@@ -63,40 +63,42 @@ export default function AboutMe() {
                         {
                             scrollTrigger: {
                                 trigger: headingRef.current,
-                                start: "top 85%",
+                                start: "top 90%",
                                 toggleActions: "play none none reverse",
                             },
                             scaleX: 1,
-                            duration: 0.8,
-                            ease: "power2.out",
+                            duration: 1.2,
+                            ease: "power3.out",
                         }
                     );
                 }
             }
-            // Animate Left Column
-            gsap.from(leftColRef.current, {
+
+            // Animate Left Column Text Reveal
+            gsap.from(".about-text", {
                 scrollTrigger: {
                     trigger: leftColRef.current,
-                    start: "top 80%",
+                    start: "top 85%",
                     toggleActions: "play none none reverse",
                 },
-                x: -50,
+                y: 30,
                 opacity: 0,
                 duration: 1,
-                ease: "power3.out"
+                ease: "power3.out",
+                stagger: 0.2
             });
 
             // Animate Right Column (Skills container)
             gsap.from(rightColRef.current, {
                 scrollTrigger: {
                     trigger: rightColRef.current,
-                    start: "top 80%",
+                    start: "top 85%",
                     toggleActions: "play none none reverse",
                 },
                 x: 50,
                 opacity: 0,
-                duration: 1,
-                ease: "power3.out"
+                duration: 1.2,
+                ease: "power4.out"
             });
 
             // Animate individual skill bars
@@ -107,11 +109,11 @@ export default function AboutMe() {
                     { width: "0%" },
                     {
                         width: `${level}%`,
-                        duration: 1.5,
-                        ease: "power2.out",
+                        duration: 2,
+                        ease: "power4.out",
                         scrollTrigger: {
                             trigger: bar,
-                            start: "top 90%",
+                            start: "top 95%",
                             toggleActions: "play none none reverse",
                         }
                     }
@@ -125,11 +127,11 @@ export default function AboutMe() {
                     const counter = { value: 0 };
                     gsap.to(counter, {
                         value: target,
-                        duration: 1.5,
-                        ease: "power2.out",
+                        duration: 2,
+                        ease: "power4.out",
                         scrollTrigger: {
                             trigger: bar,
-                            start: "top 90%",
+                            start: "top 95%",
                             toggleActions: "play none none reverse",
                         },
                         onUpdate: () => {
@@ -160,7 +162,7 @@ export default function AboutMe() {
                         <span className="inline-block text-green-400">Me</span>
                     </h2>
                     <div ref={underlineRef} className="h-1 w-24 bg-gradient-to-r from-green-400 to-emerald-500 rounded-full mb-4" />
-                    <p className="text-gray-300 text-lg">
+                    <p className="about-text text-gray-300 text-lg">
                         Hi, I’m <span className="text-green-400 font-semibold">Jaswinder singh</span>,
                         a passionate front-end developer who loves crafting beautiful,
                         responsive, and performant web applications. I enjoy working with modern

@@ -87,7 +87,7 @@ export default function Navbar() {
                 {/* Logo */}
                 <Link
                     href="/"
-                    className="text-2xl font-extrabold bg-gradient-to-r from-green-400 to-emerald-500 bg-clip-text text-transparent hover:scale-105 transition-transform"
+                    className="interactive text-2xl font-extrabold bg-gradient-to-r from-green-400 to-emerald-500 bg-clip-text text-transparent hover:scale-105 transition-transform"
                 >
                     Jaswinder
                 </Link>
@@ -98,7 +98,7 @@ export default function Navbar() {
                         <a
                             key={link.href}
                             href={link.href}
-                            className={`nav-link relative text-sm font-medium transition-colors duration-300
+                            className={`nav-link interactive relative text-sm font-medium transition-colors duration-300
                 ${activeSection === link.href
                                     ? "text-green-400"
                                     : "text-gray-300 hover:text-green-300"
@@ -126,14 +126,14 @@ export default function Navbar() {
                     <SheetContent
                         side="right"
                         className="w-[250px] bg-gradient-to-b from-black via-gray-900 to-black border-l border-gray-800 text-white"
-                        
+
                     >
                         <nav className="mt-10 flex flex-col gap-6">
                             {navLinks.map((link) => (
                                 <a
                                     key={link.href}
                                     href={link.href}
-                                    className={` px-3 text-lg font-medium transition-colors duration-300 ${activeSection === link.href
+                                    className={`interactive px-3 text-lg font-medium transition-colors duration-300 ${activeSection === link.href
                                         ? "text-green-400"
                                         : "text-gray-400 hover:text-green-300"
                                         }`}
