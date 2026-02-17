@@ -9,7 +9,6 @@ export const pageview = (url) => {
 };
 
 export const event = ({ action, category, label, value }) => {
-    debugger
     if (!window.gtag) return;
 
     window.gtag("event", action, {

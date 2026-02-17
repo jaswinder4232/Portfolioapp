@@ -40,20 +40,6 @@ export default function ContactForm() {
                 duration: 1.2,
                 ease: "power4.out"
             });
-
-            gsap.from(formRef.current.children, {
-                scrollTrigger: {
-                    trigger: formRef.current,
-                    start: "top 90%",
-                    toggleActions: "play none none reverse",
-                },
-                y: 30,
-                opacity: 0,
-                duration: 1,
-                stagger: 0.1,
-                delay: 0.2,
-                ease: "power3.out"
-            });
         }, formRef);
 
         return () => ctx.revert();
