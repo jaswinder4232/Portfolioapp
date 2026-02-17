@@ -42,12 +42,13 @@ export default function RootLayout({ children }) {
             });
           `}
         </Script>
-        <MicrosoftClarity />
+
 
       </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
+        <MicrosoftClarity />
         <Suspense fallback={null}>
           <GAListener />
         </Suspense>
